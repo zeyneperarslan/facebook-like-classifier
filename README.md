@@ -1,12 +1,5 @@
 # 📊 Facebook Gönderilerinin Beğeni Sayısına Göre Sınıflandırılması
 
-> **Ders:** BLM463  
-> **Öğrenci:** Zeynep Erarslan  
-> **Proje Türü:** Veri Madenciliği – Sınıflandırma  
-> **Model:** Karar Ağacı (CART – Gini Index)  
-> **Veri Seti:** Facebook Metrics (Moro et al., 2016)
-
----
 
 ## 📌 Proje Özeti
 
