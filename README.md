@@ -17,7 +17,7 @@ Bu projede, Facebook gönderilerinin beğeni (like) sayısı temel alınarak sı
 ## 📁 Veri Seti Bilgisi
 
 - **Kaynak:** [Moro et al., 2016](https://doi.org/10.1016/j.jbusres.2016.02.010)
-- **Kayıt Sayısı:** 500+
+- **Kayıt Sayısı:** 495
 - **Bazı Öznitelikler:**
   - `Page total likes`
   - `Type` (Gönderi tipi)
@@ -30,13 +30,13 @@ Bu projede, Facebook gönderilerinin beğeni (like) sayısı temel alınarak sı
 
 ## 📈 Sonuçlar
 
-- **Doğruluk:** %95.96
+- **Doğruluk:** %95.3
 - **En önemli öznitelik:** `Total Interactions`
 - **ROC AUC Değerleri:**
-  - Düşük: 0.93
-  - Orta: 0.93
+  - Düşük: 0.97
+  - Orta: 0.97
   - Yüksek: 1.00
-  - Mikro Ortalama: 0.96
+  - Mikro Ortalama: 0.97
 
 ---
 
