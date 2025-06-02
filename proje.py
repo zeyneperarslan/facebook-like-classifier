@@ -6,7 +6,7 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
-from sklearn.preprocessing import label_binarize , StandardScaler
+from sklearn.preprocessing import label_binarize, StandardScaler
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.metrics import roc_curve, auc
 
@@ -38,7 +38,9 @@ y = df_cleaned['like_category']
 X = pd.get_dummies(X, drop_first=True)
 
 # Eğitim ve test verilerine ayır
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
 
 # Karar ağacı modelini oluştur ve eğit
 clf = DecisionTreeClassifier(criterion='gini', max_depth=5, random_state=42)
@@ -51,6 +53,13 @@ y_pred = clf.predict(X_test)
 print("\n=== Sınıflandırma Raporu ===\n")
 print(classification_report(y_test, y_pred))
 print("Doğruluk (Accuracy):", accuracy_score(y_test, y_pred))
+
+print("Toplam satır sayısı (df_cleaned):", df_cleaned.shape[0])
+print("X_train satır sayısı:", X_train.shape[0])
+print("X_test satır sayısı:", X_test.shape[0])
+print("y_train satır sayısı:", y_train.shape[0])
+print("y_test satır sayısı:", y_test.shape[0])
+
 
 # === 1. Confusion Matrix ===
 conf_matrix = confusion_matrix(y_test, y_pred)
@@ -96,14 +105,18 @@ else:
     plt.savefig("ozellik_onemlilikleri.png", dpi=300)
     plt.show()
 
+# === 4. Öznitelik Ölçeklendirme ve ROC Eğrileri için Hazırlık ===
+# Önce eğitim seti üzerinde scaler’ı fit edelim, sonra hem eğitim hem test'i dönüştürelim.
+scaler = StandardScaler().fit(X_train)      # Sadece X_train'den öğren
+X_train_scaled = scaler.transform(X_train)  # Eğitim setini dönüştür
+X_test_scaled  = scaler.transform(X_test)   # Aynı scaler ile test setini dönüştür
+
 # Y sınıflarını binarize et (One-vs-Rest)
 y_bin = label_binarize(y, classes=["Düşük", "Orta", "Yüksek"])
 n_classes = y_bin.shape[1]
 
 # Modeli yeniden eğit (ROC için OvR wrapper ile)
 classifier = OneVsRestClassifier(DecisionTreeClassifier(max_depth=5, random_state=42))
-X_train_scaled = StandardScaler().fit_transform(X_train)
-X_test_scaled = StandardScaler().fit_transform(X_test)
 classifier.fit(X_train_scaled, label_binarize(y_train, classes=["Düşük", "Orta", "Yüksek"]))
 
 # Tahmin olasılıklarını al
@@ -115,11 +128,17 @@ tpr = dict()
 roc_auc = dict()
 
 for i in range(n_classes):
-    fpr[i], tpr[i], _ = roc_curve(label_binarize(y_test, classes=["Düşük", "Orta", "Yüksek"])[:, i], y_score[:, i])
+    fpr[i], tpr[i], _ = roc_curve(
+        label_binarize(y_test, classes=["Düşük", "Orta", "Yüksek"])[:, i],
+        y_score[:, i]
+    )
     roc_auc[i] = auc(fpr[i], tpr[i])
 
 # Mikro ortalama (tüm sınıflar üzerinden)
-fpr["micro"], tpr["micro"], _ = roc_curve(label_binarize(y_test, classes=["Düşük", "Orta", "Yüksek"]).ravel(), y_score.ravel())
+fpr["micro"], tpr["micro"], _ = roc_curve(
+    label_binarize(y_test, classes=["Düşük", "Orta", "Yüksek"]).ravel(),
+    y_score.ravel()
+)
 roc_auc["micro"] = auc(fpr["micro"], tpr["micro"])
 
 # ROC Eğrisi çizimi
