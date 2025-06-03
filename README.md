@@ -16,7 +16,7 @@ Bu projede, Facebook gönderilerinin beğeni (like) sayısı temel alınarak sı
 
 ## 📁 Veri Seti Bilgisi
 
-- **Kaynak:** [Facebook Metrics]([https://doi.org/10.1016/j.jbusres.2016.02.010](https://archive.ics.uci.edu/dataset/368/facebook+metrics))
+- **Kaynak:** [Facebook Metrics Dataset](https://archive.ics.uci.edu/dataset/368/facebook+metrics) (Moro et al., 2016, DOI: [10.1016/j.jbusres.2016.02.010](https://doi.org/10.1016/j.jbusres.2016.02.010))
 - **Kayıt Sayısı:** 495
 - **Bazı Öznitelikler:**
   - `Page total likes`
