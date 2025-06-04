@@ -5,6 +5,8 @@
 
 Bu projede, Facebook gönderilerinin beğeni (like) sayısı temel alınarak sınıflandırılması amaçlanmıştır. Karar Ağacı algoritması kullanılarak gönderiler **"Düşük", "Orta" ve "Yüksek"** olmak üzere üç beğeni kategorisine ayrılmıştır. Modelin doğruluğu ve performansı çeşitli metriklerle analiz edilmiş; ROC eğrisi, karışıklık matrisi ve karar ağacı görsel olarak değerlendirilmiştir.
 
+Proje Kod Video Linki: https://youtu.be/MhYZH_VcXEQ
+
 ---
 
 ## 🧠 Kullanılan Yöntem ve Araçlar
