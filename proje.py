@@ -27,7 +27,7 @@ def categorize_likes(x):
 
 df['like_category'] = df['like'].apply(categorize_likes)
 
-# Eksik verileri temizle
+# Eksik verileri temizledik , temiz Dataframe elde ettik
 df_cleaned = df.dropna()
 
 # Özellik ve hedef ayrımı
